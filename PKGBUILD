@@ -9,7 +9,7 @@ url="https://github.com/pulb/xbmc-es-button-switch"
 license=('GPL')
 depends=('xbmc' 'emulationstation')
 source=('https://github.com/pulb/xbmc-es-switch/archive/v0.1.0.tar.gz')
-md5sums=('2c2418aaf81dcea783e1bcef89a2beb0')
+md5sums=('34c9c68e2a09ce862b60b1d03d4e38e4')
 
 build() {
 	cd ${srcdir}/${pkgname}-${pkgver}
