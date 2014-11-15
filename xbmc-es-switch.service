@@ -1,0 +1,10 @@
+[Unit]
+Description = Starts the XBMC-ES-Switch program
+After = remote-fs.target
+
+[Service]
+Type = simple
+ExecStart = /usr/bin/xbmc-es-switch
+
+[Install]
+WantedBy = multi-user.target
