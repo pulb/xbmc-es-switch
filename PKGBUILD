@@ -18,6 +18,6 @@ build() {
 
 package() {
 	cd ${srcdir}/${pkgname}-${pkgver}
-	make prefix="$pkgdir"/usr install
+	make DESTDIR="$pkgdir" install
  	install -D -m644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }
