@@ -26,7 +26,6 @@
 #include <linux/joystick.h>
 
 #define DEVICE			"/dev/input/js0"
-#define TIMEOUT			2u // seconds
 
 #define BUTTON_A		1u
 #define BUTTON_B		2u
@@ -40,7 +39,7 @@ int main(int argc, char* argv[])
 	struct JS_DATA_TYPE js;
 	bool button_pressed = false;
 	char strbuf[255];
-	unsigned int timeout = TIMEOUT;
+	unsigned int timeout_counter = 10; // timeout = counter * 10ms
 	
 	if ((fd = open(DEVICE, O_RDONLY)) < 0)
 	{
@@ -48,7 +47,7 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 	
-	while ((timeout > 0) && !button_pressed)
+	while ((timeout_counter > 0) && !button_pressed)
 	{
 		if (read(fd, &js, JS_RETURN) != JS_RETURN)
 		{
@@ -63,8 +62,8 @@ int main(int argc, char* argv[])
 		}
 		else
 		{		
-			usleep(1 * 1000 * 1000);
-			timeout--;
+			usleep(10 * 1000);
+			timeout_counter--;
 		}
 	}
 	
