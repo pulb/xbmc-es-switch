@@ -1,6 +1,7 @@
 [Unit]
 Description = Starts the XBMC-ES-Switch program
-After = remote-fs.target
+Wants = dev-input-js0.device
+After = dev-input-js0.device remote-fs.target
 
 [Service]
 Type = simple
