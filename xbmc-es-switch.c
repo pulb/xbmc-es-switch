@@ -35,6 +35,7 @@
 
 int main(int argc, char* argv[])
 {
+	int res = 0;
 	int fd;
 	struct JS_DATA_TYPE js;
 	bool button_pressed = false;
@@ -44,26 +45,27 @@ int main(int argc, char* argv[])
 	if ((fd = open(DEVICE, O_RDONLY)) < 0)
 	{
 		perror("Failed to open joystick device");
-		return 1;
+		res = 1;
 	}
 	
-	while ((timeout_counter > 0) && !button_pressed)
+	while ((res == 0) && (timeout_counter > 0) && !button_pressed)
 	{
 		if (read(fd, &js, JS_RETURN) != JS_RETURN)
 		{
 			perror("Error reading joystick button");
-			close(fd);
-			return 1;
-		}
-		
-		if ((js.buttons & BUTTON_A) || (js.buttons & BUTTON_B))
-		{
-			button_pressed = true;
+			res = 1;
 		}
 		else
-		{		
-			usleep(10 * 1000);
-			timeout_counter--;
+		{
+			if ((js.buttons & BUTTON_A) || (js.buttons & BUTTON_B))
+			{
+				button_pressed = true;
+			}
+			else
+			{		
+				usleep(10 * 1000);
+				timeout_counter--;
+			}
 		}
 	}
 	
@@ -79,7 +81,11 @@ int main(int argc, char* argv[])
 	}
 
 	system(strbuf);
-	close(fd);
 	
-	return 0;
+	if (fd >= 0)
+	{
+		close(fd);
+	}
+	
+	return res;
 }
