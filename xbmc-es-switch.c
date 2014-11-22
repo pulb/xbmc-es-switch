@@ -35,9 +35,9 @@
 
 int main(int argc, char* argv[])
 {
-	int res = 0;
 	int fd;
 	struct JS_DATA_TYPE js;
+	bool err = false;
 	bool button_pressed = false;
 	char strbuf[255];
 	unsigned int timeout_counter = 10; // timeout = counter * 10ms
@@ -45,15 +45,15 @@ int main(int argc, char* argv[])
 	if ((fd = open(DEVICE, O_RDONLY)) < 0)
 	{
 		perror("Failed to open joystick device");
-		res = 1;
+		err = true;
 	}
 	
-	while ((res == 0) && (timeout_counter > 0) && !button_pressed)
+	while (!err && !button_pressed && (timeout_counter > 0))
 	{
 		if (read(fd, &js, JS_RETURN) != JS_RETURN)
 		{
 			perror("Error reading joystick button");
-			res = 1;
+			err = true;
 		}
 		else
 		{
@@ -87,5 +87,5 @@ int main(int argc, char* argv[])
 		close(fd);
 	}
 	
-	return res;
+	return 0;
 }
