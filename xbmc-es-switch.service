@@ -1,7 +1,7 @@
 [Unit]
 Description = Starts the XBMC-ES-Switch program
-Wants = dev-input-js0.device
-After = dev-input-js0.device remote-fs.target
+Requires = systemd-udev-settle.service
+After = systemd-udev-settle.service remote-fs.target
 
 [Service]
 Type = simple
