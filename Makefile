@@ -7,7 +7,7 @@ SDDIR = lib/systemd/system
 prefix = /usr
 
 $(PROGRAMS): $(FILES)
-	$(CC) $(FILES) -o $(PROGRAMS)
+	$(CC) $(CFLAGS) $(FILES) -o $(PROGRAMS)
 
 
 .PHONY: install
