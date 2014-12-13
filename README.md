@@ -1,4 +1,4 @@
 xbmc-es-switch
 ==============
 
-A small utility that switches between XBMC and Emulationstation at boottime via joypad button press
+Systemd service that boots into XBMC or Emulationstation depending on the state of a joypad button

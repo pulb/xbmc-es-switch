@@ -1,8 +1,10 @@
 CC = gcc
 FILES = xbmc-es-switch.c
 PROGRAMS = xbmc-es-switch
-SERVICES = xbmc-es-switch.service
+SERVICES = xbmc-es-switch.service xbmc-es-switch-fast.service
 SDDIR = lib/systemd/system
+UDEVRULES = 99-joystick.rules
+UDEVDIR = etc/udev/rules.d
 
 prefix = /usr
 
@@ -22,7 +24,11 @@ install: $(PROGRAMS)
 		install -m 0644 $$d $(DESTDIR)/$(prefix)/$(SDDIR); \
 	done
 	
-
+	test -d $(DESTDIR)/$(UDEVDIR) || mkdir --parents $(DESTDIR)/$(UDEVDIR)
+	for d in $(UDEVRULES); do \
+		install -m 0644 $$d $(DESTDIR)/$(UDEVDIR); \
+	done
+	
 .PHONY: clean
 clean:
 	rm -f $(PROGRAMS)

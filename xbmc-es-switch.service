@@ -1,7 +1,11 @@
+# XBMC-ES-Switch
+# Started at the end of the boot process.
+# Works without a connected joystick.
+
 [Unit]
 Description = Starts the XBMC-ES-Switch program
-Requires = systemd-udev-settle.service
-After = systemd-udev-settle.service remote-fs.target
+After = multi-user.target
+Conflicts = xbmc-es-switch-fast.service
 
 [Service]
 Type = simple

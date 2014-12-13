@@ -1,0 +1,16 @@
+# XBMC-ES-Switch-Fast
+# Started early in the boot process
+# (as soon as a joystick is detected).
+# DOES NOT WORK WITHOUT A CONNECTED JOYSTICK.
+
+[Unit]
+Description = Starts the XBMC-ES-Switch program
+Requires = dev-input-js0.device
+After = dev-input-js0.device remote-fs.target
+
+[Service]
+Type = simple
+ExecStart = /usr/bin/xbmc-es-switch
+
+[Install]
+WantedBy = multi-user.target
