@@ -3,13 +3,14 @@
 pkgname=xbmc-es-switch
 pkgver=0.4.0
 pkgrel=1
-pkgdesc="A small utility that switches between XBMC and Emulationstation at boottime via joypad button press"
+pkgdesc="Systemd service that boots into XBMC or EmulationStation depending on the state of a joypad button"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="https://github.com/pulb/xbmc-es-switch"
 license=('GPL')
 depends=('xbmc' 'emulationstation-git-unstable-rpi')
 source=('https://github.com/pulb/xbmc-es-switch/archive/v0.4.0.tar.gz')
 md5sums=('5a8d54dd5a3ff1266306b3657896c621')
+install='xbmc-es-switch.install'
 
 build() {
 	cd ${srcdir}/${pkgname}-${pkgver}
