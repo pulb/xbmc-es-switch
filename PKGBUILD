@@ -13,12 +13,11 @@ md5sums=('df867825e5e5e2cca5cadfab2daa5294')
 install='xbmc-es-switch.install'
 
 build() {
-	cd ${srcdir}/${pkgname}-${pkgver}
+	cd $pkgname-$pkgver
 	make
 }
 
 package() {
-	cd ${srcdir}/${pkgname}-${pkgver}
+	cd $pkgname-$pkgver
 	make DESTDIR="$pkgdir" install
- 	install -D -m644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }
